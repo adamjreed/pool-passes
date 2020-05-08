@@ -1,6 +1,6 @@
 # pool-passes
 
-A basic Vue application to generate printeable pool passes for the neighborhood association.
+A basic Vue application to generate printable pool passes for the neighborhood association.
 
 ## Project setup
 ```
@@ -12,15 +12,6 @@ yarn install
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### Deploy
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+A github action automatically builds a production dist and deploys to Github pages when changes are made to the master branch.
