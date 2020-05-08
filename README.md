@@ -1,4 +1,6 @@
-# passes
+# pool-passes
+
+A basic Vue application to generate printeable pool passes for the neighborhood association.
 
 ## Project setup
 ```

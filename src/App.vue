@@ -1,28 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Uploader v-show="!submitted" @submitted="handleFormSubmit" />
+    <Passes v-show="submitted" :passes="passes" :backgroundColor="backgroundColor" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Passes from './components/Passes.vue'
+import Uploader from './components/Uploader.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Passes,
+    Uploader
+  },
+  data: function() {
+    return {
+      submitted: false,
+      passes: null,
+      backgroundColor: ''
+    }
+  },
+  methods: {
+    handleFormSubmit(fields) {
+      this.backgroundColor = fields.color;
+      this.passes = fields.passes;
+      this.submitted = true;
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
 </style>
