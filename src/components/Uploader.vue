@@ -34,13 +34,9 @@ export default {
       Papa.parse(event.target.files[0], {
         header: true,
         transformHeader: function(h) {
-          console.log(h);
-
           return h.toLowerCase().replace(" ", "_")
         },
         complete: function(results) {
-          console.log(results.data);
-
           self.parsedData = results.data;
         }
       });

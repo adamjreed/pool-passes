@@ -1,17 +1,19 @@
 <template>
 <div id="passes">
-  <div v-for="pass in passes" class="pass" :style="'background-color: ' + backgroundColor" :key="pass.family">
-    <div class="row top">
-      <img src="@/assets/logo.png" />
-      <span class="ccca">CCCA</span>
-    </div>
-    <div class="row middle">
-      <span>{{pass.name}}</span>
-      <span>{{pass.street_number}} {{pass.street}}</span>
-    </div>
-    <div class="row bottom">
-      <span class="org">carlisle commonwealth</span>
-      <span>2020</span>
+  <div class="page" v-for="(page, index) in getPages(passes)" :key="index">
+    <div v-for="pass in page" class="pass" :style="'background-color: ' + backgroundColor" :key="pass.family">
+      <div class="row top">
+        <img src="@/assets/logo.png" />
+        <span class="ccca">CCCA</span>
+      </div>
+      <div class="row middle">
+        <span>{{pass.name}}</span>
+        <span>{{pass.street_number}} {{pass.street}}</span>
+      </div>
+      <div class="row bottom">
+        <span class="org">carlisle commonwealth</span>
+        <span>2020</span>
+      </div>
     </div>
   </div>
 </div>
@@ -24,40 +26,49 @@ export default {
   props: {
     passes: Array,
     backgroundColor: String
+  },
+  methods: {
+    getPages: function() {
+      var pages = [];
+      
+      if(!this.passes) {
+        return pages;
+      }
+
+      for (var i=0; i<this.passes.length; i+=10) {
+        pages.push(this.passes.slice(i, i+10));
+      }
+      return pages;
+    }
   }
 }
 </script>
 
 <style>
-@media print {
-  html, body {
-    height: auto;
-    font-size: 12pt;
-  }
-
-  @page { 
-    margin: 0;
-    size: 8.5in 11in;
-  }
-
-  .pass {
-    height: 264px;
-    page-break-inside:avoid;
-  }
-}
-
 #passes {
   width: 100%;
-  margin: 0;
+  height: 100%;
+}
+
+.page {
+  width: 21.59cm;
+  height: 27.94cm;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto auto;
-  flex-flow: row wrap;
 }
 
 .pass {
+  width: 7.5cm;
+  height: 4.5cm;
+  margin: 0 auto;
   flex-direction: row;
   position: relative;
-  
+  align-self: center;
+}
+
+.pass:nth-child(12) {
+  page-break-after: always;
 }
 
 .pass .row {
@@ -67,9 +78,10 @@ export default {
 
 .pass span {
   font-family: Helvetica, sans-serif;
+  font-weight: bold;
   margin: 0;
   z-index: 2;
-  font-size: 2em;
+  font-size: 0.5cm;
   text-align: center;
 }
 
@@ -79,7 +91,8 @@ export default {
 }
 
 .pass .top span {
-  margin: 20pt 20pt 0 auto;
+  margin: 0.25cm 0.25cm 0 auto;
+  font-size: 0.65cm;
 } 
 
 .pass .middle {
@@ -98,14 +111,13 @@ export default {
 }
 
 .pass .bottom span {
-  margin: 0 auto 20pt 20pt;
+  margin: 0 auto 0.25cm auto;
+  font-size: 0.4cm;
 }
 
 .pass .bottom span + span {
-  margin: 0 20pt 20pt auto;
-}
-
-.pass .org {
-  font-size: 1.5em;
+  font-size: 0.75cm;
+  font-weight: bold;
+  margin: 0 0.25cm 0.25cm 0;
 }
 </style>
