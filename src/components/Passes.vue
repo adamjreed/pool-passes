@@ -2,10 +2,8 @@
 <div id="passes">
   <div class="page" v-for="(page, index) in getPages(passes)" :key="index">
     <div v-for="pass in page" class="pass" :style="'background-color: ' + backgroundColor" :key="pass.family">
-      <div class="row top">
-        <img src="@/assets/logo.png" />
-        <span class="ccca">CCCA</span>
-      </div>
+      <img id="logo" src="@/assets/logo.png" />
+      <span id="ccca">CCCA</span>
       <div class="row middle">
         <span>{{pass.name}}</span>
         <span>{{pass.street_number}} {{pass.street}}</span>
@@ -62,14 +60,24 @@ export default {
   width: 7.5cm;
   height: 4.5cm;
   margin: 0 auto;
-  flex-direction: row;
   position: relative;
   align-self: center;
+  display: flex;
 }
 
-.pass:nth-child(12) {
-  page-break-after: always;
+.pass #logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.75cm;
 }
+
+.pass #ccca {
+  position: absolute;
+  top: 0.25cm;
+  right: 0.25cm;
+  font-size: 0.65cm;
+} 
 
 .pass .row {
   display: flex;
@@ -85,19 +93,9 @@ export default {
   text-align: center;
 }
 
-.pass .top img {
-  width: 30%;
-  margin-right: auto;
-}
-
-.pass .top span {
-  margin: 0.25cm 0.25cm 0 auto;
-  font-size: 0.65cm;
-} 
-
 .pass .middle {
   flex-direction: column;
-  margin-top: -5%;
+  align-self: center;
 }
 
 .pass .middle span + span {
@@ -105,7 +103,8 @@ export default {
 }
 
 .pass .bottom {
-  margin-top: 5%;
+  position: absolute;
+  bottom: 0;
   display: flex;
   align-items: center;
 }
