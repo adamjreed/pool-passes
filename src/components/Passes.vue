@@ -10,7 +10,7 @@
       </div>
       <div class="row bottom">
         <span class="org">carlisle commonwealth</span>
-        <span>2020</span>
+        <span>{{year}}</span>
       </div>
     </div>
   </div>
@@ -24,6 +24,11 @@ export default {
   props: {
     passes: Array,
     backgroundColor: String
+  },
+  computed: {
+    year() {
+      return new Date().getFullYear();
+    }
   },
   methods: {
     getPages: function() {
